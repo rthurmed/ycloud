@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>yCloud</title>
+  <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.0/css/bulma.min.css">
+</head>
+
+<body>
+  <section class="section pb-5">
+    <div class="container">
+      <h1 class="title">yCloud</h1>
+      <!-- <div class="block">
+        <div class="buttons">
+          <button class="button is-rounded" hx-post="/counter" hx-target="#counter">
+            +1
+          </button>
+        </div>
+        <div class="content">
+          <p id="counter"></p>
+        </div>
+      </div> -->
+      <div class="block">
+        <form id="file-upload-form" hx-post="/file" hx-encoding="multipart/form-data" hx-target="#file-list">
+          <div class="field is-grouped">
+            <div id="file-upload-field" class="file has-name">
+              <label class="file-label">
+                <input class="file-input" type="file" name="file" />
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="size-4">
+                      <path
+                        d="M7.25 10.25a.75.75 0 0 0 1.5 0V4.56l2.22 2.22a.75.75 0 1 0 1.06-1.06l-3.5-3.5a.75.75 0 0 0-1.06 0l-3.5 3.5a.75.75 0 0 0 1.06 1.06l2.22-2.22v5.69Z" />
+                      <path
+                        d="M3.5 9.75a.75.75 0 0 0-1.5 0v1.5A2.75 2.75 0 0 0 4.75 14h6.5A2.75 2.75 0 0 0 14 11.25v-1.5a.75.75 0 0 0-1.5 0v1.5c0 .69-.56 1.25-1.25 1.25h-6.5c-.69 0-1.25-.56-1.25-1.25v-1.5Z" />
+                    </svg>
+                  </span>
+                  <span class="file-label"> Choose a file… </span>
+                </span>
+                <span class="file-name"> your-file.txt </span>
+              </label>
+            </div>
+            <p class="control">
+              <button class="button" type="submit">Submit</button>
+            </p>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </section>
+  <hr class="mt-0" />
+  <section>
+    <div>
+      <div id="file-list" hx-get="/file" hx-trigger="load"></div>
+    </div>
+  </section>
+</body>
+<script>
+  const fileInput = document.querySelector("#file-upload-field input[type=file]");
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector("#file-upload-field .file-name");
+      fileName.textContent = fileInput.files[0].name;
+    }
+  };
+</script>
+
+</html>
