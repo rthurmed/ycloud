@@ -19,9 +19,9 @@ def counter():
     return render_template("fragment/counter.html", count=counter_service.get_value())
 
 @app.get("/file")
-def get_all_file():
+def get_all_file(*, error=None):
     files = file_service.get_all()
-    return render_template("fragment/files.html", files=files)
+    return render_template("fragment/files.html", files=files, error=error)
 
 @app.get("/file/<name>")
 def get_file(name: str):
@@ -31,15 +31,14 @@ def get_file(name: str):
 @app.post("/file")
 def post_file():
     if "file" not in request.files:
-        abort(400)
+        return get_all_file(error="Missing file data on upload.")
     
     file = request.files["file"]
 
     try:
         file_service.store(file)
     except FileAlreadyExistsException as exc:
-        abort(400)
+        return get_all_file(error="File already exists.")
 
-    files = file_service.get_all()
-    return render_template("fragment/files.html", files=files)
+    return get_all_file()
     
