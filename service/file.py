@@ -5,7 +5,7 @@ from werkzeug.datastructures import FileStorage
 from werkzeug.utils import secure_filename
 
 
-STORAGE_DIR = '/tmp/htmx-flask/'
+STORAGE_DIR = './storage'
 
 storage_path = Path(STORAGE_DIR)
 os.makedirs(storage_path, exist_ok=True)
