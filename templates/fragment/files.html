@@ -1,4 +1,4 @@
-<section class="section">
+<section id="files-section" class="section">
     {% if error %}
     <div id="files-error-notification" class="notification is-danger">
         <button class="delete" onclick="this.parentNode.parentNode.removeChild(this.parentNode)"></button>
@@ -30,6 +30,10 @@
     </div>
 </section>
 <style>
+    #files-section {
+        overflow-y: scroll;
+        min-height: 110vh;
+    }
     #files-error-notification {
         position: absolute;
         right: 1em;
