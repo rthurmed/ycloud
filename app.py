@@ -7,6 +7,7 @@ from service.counter import counter_service
 from service.file import file_service, FileAlreadyExistsException
 
 app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
 @app.get("/")
 def index():
